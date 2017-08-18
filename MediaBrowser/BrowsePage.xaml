@@ -6,58 +6,100 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:data="using:MediaBrowser.Models"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
 
     <Page.Resources>
         <DataTemplate x:DataType="data:MediaInfo" x:Key="MediaDataTemplate">
-            <StackPanel  Margin="20,20,20,20">
-                <Image Width="150" Height="225" Source="{x:Bind CoverImage}" Stretch="Fill"  HorizontalAlignment="Center" />
-                <TextBlock FontSize="16" Text="{x:Bind Title}" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="Wheat"/>
-            </StackPanel>
+            <Grid Background="#FF1D1D1D" BorderBrush="Black" BorderThickness="1" Margin="20,20,20,0">
+                <Image Source="{x:Bind CoverImage}" Stretch="UniformToFill"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <!--<TextBlock FontSize="16" Text="{x:Bind Title}" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="GhostWhite"/>-->
+            </Grid>
         </DataTemplate>
     </Page.Resources>
 
-    <Grid Background="#FF1D1D1D">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <RelativePanel>
-            <TextBox Name="SearchBox" Height="25" Width="300" FontSize="24" RelativePanel.AlignLeftWithPanel="True" Margin="50,25,0,0" FontFamily="Segoe MDL2 Assets" PlaceholderText="&#xE1A3;" Background="#FFC4C4C4"/>
-            <ComboBox Name="SortBox" SelectionChanged="SortBox_SelectionChanged" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWith="SearchBox" Margin="0,25,100,0" MinWidth="110" MaxHeight="28" FontSize="12" Background="#FFC4C4C4">
+        <RelativePanel Background="#FF1D1D1D" Margin="50,0,50,0" BorderBrush="Gray" BorderThickness="0,0,0,7" MinHeight="75">
+            <TextBox Name="SearchBox" 
+                     Height="25" Width="300" 
+                     FontSize="16" 
+                     RelativePanel.AlignLeftWithPanel="True" 
+                     RelativePanel.AlignVerticalCenterWithPanel="True"
+                     FontFamily="Segoe MDL2 Assets" 
+                     PlaceholderText="&#xE1A3;" 
+                     Background="#FFC4C4C4"/>
+            <ComboBox Name="SortBox" 
+                      SelectionChanged="SortBox_SelectionChanged" 
+                      RelativePanel.AlignRightWithPanel="True" 
+                      RelativePanel.AlignVerticalCenterWith="SearchBox" 
+                      Margin="0,0,0,0" MinWidth="110" 
+                      MaxHeight="28" 
+                      FontSize="12" 
+                      Background="#FFC4C4C4">
                 <ComboBoxItem Content="Alphabetical" IsSelected="True"/>
                 <ComboBoxItem Content="Rating" />
                 <ComboBoxItem Content="Season" />
             </ComboBox>
 
-            <ComboBox Name="ViewStyleBox" SelectionChanged="ViewStyleBox_SelectionChanged" RelativePanel.LeftOf="SortBox" RelativePanel.AlignVerticalCenterWith="SearchBox" Margin="0,25,20,0" Background="#FFC4C4C4" FontSize="12" MaxHeight="28">
+            <ComboBox Name="ViewStyleBox" 
+                      SelectionChanged="ViewStyleBox_SelectionChanged" 
+                      RelativePanel.LeftOf="SortBox" 
+                      RelativePanel.AlignVerticalCenterWith="SearchBox" 
+                      Margin="0,0,20,0" 
+                      Background="#FFC4C4C4" 
+                      FontSize="12" 
+                      MaxHeight="28">
                 <ComboBoxItem Content="Tile" IsSelected="True"/>
                 <ComboBoxItem Content="List" />
             </ComboBox>
 
-            <ToggleButton Name="FilterButton" FontFamily="Segoe MDL2 Assets" Content="&#xE16E;" FontSize="10" Click="FilterButton_Click" RelativePanel.LeftOf="ViewStyleBox" RelativePanel.AlignVerticalCenterWith="SearchBox" Margin="0,25,20,0" Background="#FFC4C4C4"/>
-
-            <Line X1="0" X2="10000" Y1="0" Y2="0" Stroke="Gray" Fill="LightGray" StrokeThickness="5" StrokeEndLineCap="Round" StrokeStartLineCap="Round" RelativePanel.Below="SearchBox" Margin="0,20,0,0" />
+            <ToggleButton Name="FilterButton" 
+                          FontFamily="Segoe MDL2 Assets" 
+                          Content="&#xE16E;" 
+                          FontSize="10" 
+                          Click="FilterButton_Click" 
+                          RelativePanel.LeftOf="ViewStyleBox" 
+                          RelativePanel.AlignVerticalCenterWith="SearchBox" 
+                          Margin="0,0,20,0" 
+                          Background="#FFC4C4C4"/>
         </RelativePanel>
 
-        <SplitView Name="MySplitView" 
+        <SplitView Name="FilterSplitView" 
                    Grid.Row="1" 
                    DisplayMode="Inline" 
                    OpenPaneLength="175" 
                    PanePlacement="Right"
-                   IsPaneOpen="False">
+                   IsPaneOpen="False"
+                   Margin="0,0,50,0" 
+                   Background="#FF1D1D1D"
+                   PaneClosing="FilterSplitView_PaneClosing">
             <SplitView.Pane>
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                    <StackPanel Orientation="Vertical" Background="#FF636363">
+                    <StackPanel Orientation="Vertical" Background="Gray">
 
-                        <TextBlock Text="Genres" FontSize="24" HorizontalAlignment="Center"  RequestedTheme="Dark" Margin="0,20,0,0"/>
+                        <TextBlock Text="Genres" 
+                                   FontSize="24" 
+                                   HorizontalAlignment="Center"  
+                                   RequestedTheme="Dark" 
+                                   Margin="0,20,0,0"/>
 
-                        <Button Name="FilterResetButton" Content="Reset" Click="FilterResetButton_Click" FontSize="18" HorizontalAlignment="Stretch" Margin="0,20,0,0" Background="#FF27ABD7" RequestedTheme="Dark"></Button>
+                        <Button Name="FilterResetButton" 
+                                Content="Reset" 
+                                Click="FilterResetButton_Click" 
+                                FontSize="18" 
+                                HorizontalAlignment="Stretch" 
+                                Margin="0,20,0,0" 
+                                Background="#FF4D4D4D" 
+                                RequestedTheme="Dark"></Button>
 
                         <ListView Name="TagListView"
                                   SelectionMode="Multiple"
                                   SelectionChanged="TagListView_SelectionChanged"
-                                  Background="#FF27ABD7"
+                                  Background="Gray"
                                   RequestedTheme="Dark"
                                   Margin="0,0,0,0"
                                   BorderBrush="Black"
@@ -80,26 +122,20 @@
             </SplitView.Pane>
             <SplitView.Content>
 
-
-                <GridView Name="MediaInfoGrid"
-                          ItemsSource="{x:Bind Shows}" 
-                        IsItemClickEnabled="True" 
-                        ItemClick="GridView_ItemClick"
-                        ItemTemplate="{StaticResource MediaDataTemplate}"
-                        Grid.Row="1"
-                        Margin="30,0,0,0"
-                        ScrollViewer.VerticalScrollBarVisibility="Auto"
-                        ScrollViewer.VerticalScrollMode="Enabled"
-                        HorizontalContentAlignment="Center">
-
-                    <GridView.ItemContainerStyle>
-                        <Style TargetType="FrameworkElement">
-                            <Setter Property="Margin" Value="0 0 30 20"/>
-                        </Style>
-                    </GridView.ItemContainerStyle>
-
-                </GridView>
-                
+                <controls:AdaptiveGridView 
+                                    Name="MediaInfoGrid"
+                                    Background="#FF252525"
+                                    OneRowModeEnabled="False"
+                                    ItemClick="GridView_ItemClick"
+                                    SizeChanged="MediaInfoGrid_SizeChanged"
+                                    Margin="50,20,0,20"
+                                    ItemHeight="300"
+                                    DesiredWidth="225"
+                                    SelectionMode="None"
+                                    IsItemClickEnabled="True"
+                                    
+                                    ItemsSource="{x:Bind Shows}"
+                                    ItemTemplate="{StaticResource MediaDataTemplate}"/>
             </SplitView.Content>
         </SplitView>
     </Grid>

@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using MediaBrowser.Models;
+using Microsoft.Toolkit.Uwp;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -61,7 +62,7 @@ namespace MediaBrowser
 
         private void FilterButton_Click(object sender, RoutedEventArgs e)
         {
-            MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
+            FilterSplitView.IsPaneOpen = !FilterSplitView.IsPaneOpen;
         }
 
         private void FilterResetButton_Click(object sender, RoutedEventArgs e)
@@ -73,6 +74,29 @@ namespace MediaBrowser
         private void TagListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Update the grid list to display shows with the selected tags only
+        }
+
+        private void MediaInfoGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if(FilterSplitView.IsPaneOpen)
+            {
+                MediaInfoGrid.Margin = new Thickness(50, 20, 50, 20);
+            }
+        }
+
+        private void FilterSplitView_PaneClosing(SplitView sender, SplitViewPaneClosingEventArgs args)
+        {
+            MediaInfoGrid.Margin = new Thickness(50, 20, 0, 20);
+        }
+
+        private void MediaInfoGrid_FocusEngaged(Control sender, FocusEngagedEventArgs args)
+        {
+
+        }
+
+        private void MediaInfoGrid_GettingFocus(UIElement sender, GettingFocusEventArgs args)
+        {
+
         }
     }
 }
