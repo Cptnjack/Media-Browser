@@ -10,22 +10,22 @@
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>e2a2dfdc-296a-4662-929b-8af80d21c6f3</PackageIdentityName>
     <PackageIdentityPublisher>CN=Xevon</PackageIdentityPublisher>
-    <IntermediateOutputPath>d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\obj\x86\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>D:\Documents\Media Browser App\MediaBrowser\obj\x86\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType></RemoteDeploymentType>
     <PackageRegistrationPath></PackageRegistrationPath>
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\bin\x86\Debug\AppX</LayoutDir>
+    <LayoutDir>D:\Documents\Media Browser App\MediaBrowser\bin\x86\Debug\AppX</LayoutDir>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\bin\x86\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="D:\Documents\Media Browser App\MediaBrowser\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\bin\x86\Debug\MediaBrowser.exe">
+    <AppxPackagedFile Include="D:\Documents\Media Browser App\MediaBrowser\bin\x86\Debug\MediaBrowser.exe">
       <PackagePath>entrypoint\MediaBrowser.exe</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.CSharp\4.0.1\lib\netcore50\Microsoft.CSharp.dll">
@@ -67,8 +67,32 @@
     <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.NETCore.Portable.Compatibility\1.0.2\lib\netcore50\System.dll">
       <PackagePath>System.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Animations\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Animations.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Animations.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.VisualBasic\10.0.1\lib\netcore50\Microsoft.VisualBasic.dll">
       <PackagePath>Microsoft.VisualBasic.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Xaml.Behaviors.Uwp.Managed\1.1.0\lib\uap10.0\Microsoft.Xaml.Interactions.dll">
+      <PackagePath>Microsoft.Xaml.Interactions.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Xaml.Behaviors.Uwp.Managed\1.1.0\lib\uap10.0\Microsoft.Xaml.Interactivity.dll">
+      <PackagePath>Microsoft.Xaml.Interactivity.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Newtonsoft.Json\9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll">
+      <PackagePath>Newtonsoft.Json.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Robmikh.CompositionSurfaceFactory\0.7.1\runtimes\win10-x86\native\Robmikh.CompositionSurfaceFactory.dll">
+      <PackagePath>Robmikh.CompositionSurfaceFactory.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\runtime.any.System.Collections\4.0.11\lib\netcore50\System.Collections.dll">
       <PackagePath>System.Collections.dll</PackagePath>
@@ -370,131 +394,176 @@
     <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\System.Xml.XmlSerializer\4.0.11\lib\netcore50\System.Xml.XmlSerializer.dll">
       <PackagePath>System.Xml.XmlSerializer.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\1.jpg">
-      <PackagePath>Assets\1.jpg</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Win2D.uwp\1.19.0\runtimes\win10-x86\native\Microsoft.Graphics.Canvas.dll">
+      <PackagePath>Microsoft.Graphics.Canvas.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\10.jpg">
-      <PackagePath>Assets\10.jpg</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Robmikh.CompositionSurfaceFactory\0.7.1\lib\uap10.0\Robmikh.CompositionSurfaceFactory.winmd">
+      <PackagePath>Robmikh.CompositionSurfaceFactory.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\11.jpg">
-      <PackagePath>Assets\11.jpg</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Win2D.uwp\1.19.0\lib\uap10.0\Microsoft.Graphics.Canvas.winmd">
+      <PackagePath>Microsoft.Graphics.Canvas.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\2.jpg">
-      <PackagePath>Assets\2.jpg</PackagePath>
+    <AppxPackagedFile Include="D:\Documents\Media Browser App\MediaBrowser\Assets\TempPic.png">
+      <PackagePath>Assets\TempPic.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\3.jpg">
-      <PackagePath>Assets\3.jpg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\4.jpg">
-      <PackagePath>Assets\4.jpg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\5.jpg">
-      <PackagePath>Assets\5.jpg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\6.jpg">
-      <PackagePath>Assets\6.jpg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\7.jpg">
-      <PackagePath>Assets\7.jpg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\8.jpg">
-      <PackagePath>Assets\8.jpg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\9.jpg">
-      <PackagePath>Assets\9.jpg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\BackgroundImage.jpg">
-      <PackagePath>Assets\BackgroundImage.jpg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\blocks_rainbow_3d_graphics_background_76559_3840x2400.jpg">
-      <PackagePath>Assets\blocks_rainbow_3d_graphics_background_76559_3840x2400.jpg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Properties\Default.rd.xml">
-      <PackagePath>Properties\Default.rd.xml</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="D:\Documents\Media Browser App\MediaBrowser\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="D:\Documents\Media Browser App\MediaBrowser\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="D:\Documents\Media Browser App\MediaBrowser\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="D:\Documents\Media Browser App\MediaBrowser\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="D:\Documents\Media Browser App\MediaBrowser\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="D:\Documents\Media Browser App\MediaBrowser\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\bin\x86\Debug\MediaBrowser.xr.xml">
+    <AppxPackagedFile Include="D:\Documents\Media Browser App\MediaBrowser\Properties\Default.rd.xml">
+      <PackagePath>Properties\Default.rd.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Documents\Media Browser App\MediaBrowser\bin\x86\Debug\MediaBrowser.xr.xml">
       <PackagePath>MediaBrowser.xr.xml</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.15063.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\bin\x86\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\Microsoft.Toolkit.Uwp.UI.Controls.xr.xml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\Microsoft.Toolkit.Uwp.UI.Controls.xr.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\BladeView\BladeView.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\BladeView\BladeView.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\Carousel\Carousel.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\Carousel\Carousel.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\DropShadowPanel\DropShadowPanel.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\DropShadowPanel\DropShadowPanel.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\Expander\Expander.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\Expander\Expander.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\GridSplitter\GridSplitter.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\GridSplitter\GridSplitter.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\HamburgerMenu\HamburgerMenu.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\HamburgerMenu\HamburgerMenu.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\HeaderedTextBlock\HeaderedTextBlock.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\HeaderedTextBlock\HeaderedTextBlock.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\ImageEx\ImageEx.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\ImageEx\ImageEx.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\ImageEx\RoundImageEx.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\ImageEx\RoundImageEx.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\Loading\Loading.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\Loading\Loading.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\MarkdownTextBlock\MarkdownTextBlock.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\MarkdownTextBlock\MarkdownTextBlock.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\MasterDetailsView\MasterDetailsView.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\MasterDetailsView\MasterDetailsView.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\Menu\Menu.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\Menu\Menu.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\OrbitView\OrbitView.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\OrbitView\OrbitView.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\PullToRefreshListView\PullToRefreshListView.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\PullToRefreshListView\PullToRefreshListView.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\RadialGauge\RadialGauge.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\RadialGauge\RadialGauge.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\RadialProgressBar\RadialProgressBar.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\RadialProgressBar\RadialProgressBar.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\RangeSelector\RangeSelector.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\RangeSelector\RangeSelector.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\RotatorTile\RotatorTile.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\RotatorTile\RotatorTile.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\ScrollHeader\ScrollHeader.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\ScrollHeader\ScrollHeader.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\SlidableListItem\SlidableListItem.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\SlidableListItem\SlidableListItem.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\Themes\Generic.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\Themes\Generic.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Xevon\.nuget\packages\Microsoft.Toolkit.Uwp.UI.Controls\1.5.1\lib\uap10.0\Microsoft.Toolkit.Uwp.UI.Controls\TileControl\TileControl.xaml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\TileControl\TileControl.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Documents\Media Browser App\MediaBrowser\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\bin\x86\Debug\Core\MediaBrowser.exe">
+    <AppxPackagedFile Include="D:\Documents\Media Browser App\MediaBrowser\bin\x86\Debug\Core\MediaBrowser.exe">
       <PackagePath>MediaBrowser.exe</PackagePath>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.NET.CoreRuntime\1.1\">
       <Name>Microsoft.NET.CoreRuntime.1.1</Name>
-      <Version>1.1.25129.1</Version>
+      <Version>1.1.25305.1</Version>
       <Architecture>ARM</Architecture>
-      <FrameworkIdentity>Name = Microsoft.NET.CoreRuntime.1.1, MinVersion = 1.1.25129.1, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <FrameworkIdentity>Name = Microsoft.NET.CoreRuntime.1.1, MinVersion = 1.1.25305.1, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
       <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.NET.CoreRuntime\1.1\.\AppX\ARM\Microsoft.NET.CoreRuntime.1.1.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.NET.CoreRuntime\1.1\">
       <Name>Microsoft.NET.CoreRuntime.1.1</Name>
-      <Version>1.1.25129.1</Version>
+      <Version>1.1.25305.1</Version>
       <Architecture>x64</Architecture>
-      <FrameworkIdentity>Name = Microsoft.NET.CoreRuntime.1.1, MinVersion = 1.1.25129.1, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <FrameworkIdentity>Name = Microsoft.NET.CoreRuntime.1.1, MinVersion = 1.1.25305.1, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
       <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.NET.CoreRuntime\1.1\.\AppX\x64\Microsoft.NET.CoreRuntime.1.1.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.NET.CoreRuntime\1.1\">
       <Name>Microsoft.NET.CoreRuntime.1.1</Name>
-      <Version>1.1.25129.1</Version>
+      <Version>1.1.25305.1</Version>
       <Architecture>x86</Architecture>
-      <FrameworkIdentity>Name = Microsoft.NET.CoreRuntime.1.1, MinVersion = 1.1.25129.1, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <FrameworkIdentity>Name = Microsoft.NET.CoreRuntime.1.1, MinVersion = 1.1.25305.1, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
       <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.NET.CoreRuntime\1.1\.\AppX\x86\Microsoft.NET.CoreRuntime.1.1.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
       <Name>Microsoft.VCLibs.140.00.Debug</Name>
-      <Version>14.0.25023.0</Version>
+      <Version>14.0.25506.0</Version>
       <Architecture>ARM</Architecture>
-      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.25023.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.25506.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
       <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\ARM\Microsoft.VCLibs.ARM.Debug.14.00.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
       <Name>Microsoft.VCLibs.140.00.Debug</Name>
-      <Version>14.0.25023.0</Version>
+      <Version>14.0.25506.0</Version>
       <Architecture>x64</Architecture>
-      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.25023.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.25506.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
       <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\x64\Microsoft.VCLibs.x64.Debug.14.00.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
       <Name>Microsoft.VCLibs.140.00.Debug</Name>
-      <Version>14.0.25023.0</Version>
+      <Version>14.0.25506.0</Version>
       <Architecture>x86</Architecture>
-      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.25023.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.25506.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
       <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\x86\Microsoft.VCLibs.x86.Debug.14.00.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>

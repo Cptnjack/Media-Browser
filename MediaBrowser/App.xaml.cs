@@ -19,6 +19,8 @@ using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 
+using MediaBrowser.Models;
+
 namespace MediaBrowser
 {
     /// <summary>
@@ -26,6 +28,10 @@ namespace MediaBrowser
     /// </summary>
     sealed partial class App : Application
     {
+
+        UserSettings currentSettings;
+        Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -34,6 +40,32 @@ namespace MediaBrowser
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            currentSettings = new UserSettings();
+
+            Suspending += (s, a) =>
+            {
+                Object value = localSettings.Values["ViewStyle"];
+                currentSettings.ViewStyle = value.ToString();
+
+                value = localSettings.Values["SortStyle"];
+                currentSettings.SortStyle = value.ToString();
+
+                value = localSettings.Values["ColorTheme"];
+                currentSettings.ColorTheme = value.ToString();
+
+                value = localSettings.Values["IndividualPagesEnabled"];
+                if (value.ToString() == "True")
+                {
+                    currentSettings.IndividualPagesEnabled = true;
+                }
+                else
+                {
+                    currentSettings.IndividualPagesEnabled = false;
+                }
+
+                Settings.SaveSettings(currentSettings); // I really like my data and want it for later too
+            };
         }
 
         /// <summary>

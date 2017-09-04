@@ -3,35 +3,78 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using Windows.Storage;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Controls;
+using System.Xml;
+using System.IO;
+using System.Xml.Linq;
 
 namespace MediaBrowser.Models
 {
     public class MediaInfo
     {
-        public int MediaId { get; set; }
         public string Title { get; set; }
         public string CoverImage { get; set; }
+        public string MediaPageImage { get; set; }
+        public double Rating { get; set; }
+        public string DisplayRating { get; set; }
+        public bool Favorite { get; set; }
+        public string ExternalLink { get; set; }
+        public string Overview { get; set; }
+        public ObservableCollection<string> Tags { get; set; }
+        public ObservableCollection<EpisodeInfo> EpisodeList;
+        public string UserDirectory { get; set; }
+        public string LocalAssestMediaDirectory { get; set; }
+
+        public MediaInfo()
+        {
+            this.Title = "";
+            this.CoverImage = "";
+            this.MediaPageImage = "";
+            this.Rating = -1;
+            this.DisplayRating = "";
+            this.Favorite = false;
+            this.ExternalLink = "";
+            this.Overview = "";
+            this.Tags = new ObservableCollection<string>();
+            this.EpisodeList = new ObservableCollection<EpisodeInfo>();
+        }
     }
 
-    public class MediaManager
+    public class MediaDir
     {
-        public static List<MediaInfo> GetMedia()
+        public string Name { get; set; }
+        public string UserDirFolder { get; set; }
+        public string LocalAssetFolder { get; set; }
+        public string AccessToken { get; set; }
+        public List<string> ExcludedMedia { get; set; }
+
+        public MediaDir()
         {
-            var media = new List<MediaInfo>();
+            Name = "";
+            UserDirFolder = "";
+            LocalAssetFolder = "";
+            AccessToken = "";
+            ExcludedMedia = new List<string>();
+        }
+    }
 
-            media.Add(new MediaInfo { MediaId = 11, Title = "C The Money of Soul and Possibility Control", CoverImage = "Assets/11.jpg" });
-            media.Add(new MediaInfo { MediaId = 1, Title = "Attack on Titan", CoverImage="Assets/1.jpg" });
-            media.Add(new MediaInfo { MediaId = 2, Title = "Barakamon", CoverImage = "Assets/2.jpg" });
-            media.Add(new MediaInfo { MediaId = 3, Title = "Beautiful Bones", CoverImage = "Assets/3.jpg" });
-            media.Add(new MediaInfo { MediaId = 4, Title = "Ben-To", CoverImage = "Assets/4.jpg" });
-            media.Add(new MediaInfo { MediaId = 5, Title = "Blood Blockade Battlefront", CoverImage = "Assets/5.jpg" });
-            media.Add(new MediaInfo { MediaId = 6, Title = "Blue Exorcist", CoverImage = "Assets/6.jpg" });
-            media.Add(new MediaInfo { MediaId = 7, Title = "Blue Spring Ride", CoverImage = "Assets/7.jpg" });
-            media.Add(new MediaInfo { MediaId = 8, Title = "Bokura Ga Ita", CoverImage = "Assets/8.jpg" });
-            media.Add(new MediaInfo { MediaId = 9, Title = "BTOOOM!", CoverImage = "Assets/9.jpg" });
-            media.Add(new MediaInfo { MediaId = 10, Title = "Bunny Drop", CoverImage = "Assets/10.jpg" });
+    public class EpisodeInfo
+    {
+        public int Id { get; set; }
+        public string FileName { get; set; }
+        public string Path { get; set; }
+        public BitmapImage Thumbnail;
+        public StorageFile EpisodeFile { get; set; }
 
-            return media;
+        public EpisodeInfo()
+        {
+            Id = 0;
+            FileName = "";
+            Path = "";
+            EpisodeFile = null;
         }
     }
 }

@@ -1,1 +1,1 @@
-d:\documents\visual studio 2017\Projects\MediaBrowser\MediaBrowser\MediaBrowser.csproj;x86
+D:\Documents\Media Browser App\MediaBrowser\MediaBrowser.csproj;x86

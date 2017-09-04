@@ -95,9 +95,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Tags.cs" />
+    <Compile Include="Models\Settings.cs" />
     <Compile Include="BrowsePage.xaml.cs">
       <DependentUpon>BrowsePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataTemplates.cs" />
     <Compile Include="EditingPage.xaml.cs">
       <DependentUpon>EditingPage.xaml</DependentUpon>
     </Compile>
@@ -108,6 +111,7 @@
       <DependentUpon>MediaPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\MediaInfo.cs" />
+    <Compile Include="Models\XmlParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -117,17 +121,7 @@
     <None Include="MediaBrowser_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\1.jpg" />
-    <Content Include="Assets\10.jpg" />
-    <Content Include="Assets\11.jpg" />
-    <Content Include="Assets\2.jpg" />
-    <Content Include="Assets\3.jpg" />
-    <Content Include="Assets\4.jpg" />
-    <Content Include="Assets\5.jpg" />
-    <Content Include="Assets\6.jpg" />
-    <Content Include="Assets\7.jpg" />
-    <Content Include="Assets\8.jpg" />
-    <Content Include="Assets\9.jpg" />
+    <Content Include="Assets\TempPic.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -141,13 +135,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AdaptiveGridItemTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="BrowsePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DarkThemeDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="EditingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LightThemeDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -160,7 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>5.2.3</Version>
+      <Version>5.4.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp">
       <Version>1.5.1</Version>

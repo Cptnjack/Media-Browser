@@ -67,6 +67,18 @@ namespace MediaBrowser.MediaBrowser_XamlTypeInfo
             {
                 xamlType = CreateXamlType(typeIndex);
             }
+            var userXamlType = xamlType as global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType;
+            if(xamlType == null || (userXamlType != null && userXamlType.IsReturnTypeStub && !userXamlType.IsLocalType))
+            {
+                global::Windows.UI.Xaml.Markup.IXamlType libXamlType = CheckOtherMetadataProvidersForType(type);
+                if (libXamlType != null)
+                {
+                    if(libXamlType.IsConstructible || xamlType == null)
+                    {
+                        xamlType = libXamlType;
+                    }
+                }
+            }
             if (xamlType != null)
             {
                 _xamlTypeCacheByName.Add(xamlType.FullName, xamlType);
@@ -90,6 +102,18 @@ namespace MediaBrowser.MediaBrowser_XamlTypeInfo
             if(typeIndex != -1)
             {
                 xamlType = CreateXamlType(typeIndex);
+            }
+            var userXamlType = xamlType as global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType;
+            if(xamlType == null || (userXamlType != null && userXamlType.IsReturnTypeStub && !userXamlType.IsLocalType))
+            {
+                global::Windows.UI.Xaml.Markup.IXamlType libXamlType = CheckOtherMetadataProvidersForName(typeName);
+                if (libXamlType != null)
+                {
+                    if(libXamlType.IsConstructible || xamlType == null)
+                    {
+                        xamlType = libXamlType;
+                    }
+                }
             }
             if (xamlType != null)
             {
@@ -132,21 +156,59 @@ namespace MediaBrowser.MediaBrowser_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[6];
-            _typeNameTable[0] = "MediaBrowser.BrowsePage";
-            _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
-            _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
-            _typeNameTable[3] = "MediaBrowser.EditingPage";
-            _typeNameTable[4] = "MediaBrowser.MainPage";
-            _typeNameTable[5] = "MediaBrowser.MediaPage";
+            _typeNameTable = new string[25];
+            _typeNameTable[0] = "MediaBrowser.DataTemplates";
+            _typeNameTable[1] = "Windows.UI.Xaml.ResourceDictionary";
+            _typeNameTable[2] = "Object";
+            _typeNameTable[3] = "Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView";
+            _typeNameTable[4] = "Windows.UI.Xaml.Controls.GridView";
+            _typeNameTable[5] = "Windows.UI.Xaml.Controls.ItemsControl";
+            _typeNameTable[6] = "Double";
+            _typeNameTable[7] = "Boolean";
+            _typeNameTable[8] = "System.Windows.Input.ICommand";
+            _typeNameTable[9] = "Windows.UI.Xaml.Controls.ItemsPanelTemplate";
+            _typeNameTable[10] = "Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel";
+            _typeNameTable[11] = "Windows.UI.Xaml.Controls.ContentControl";
+            _typeNameTable[12] = "Windows.UI.Color";
+            _typeNameTable[13] = "System.ValueType";
+            _typeNameTable[14] = "Windows.UI.Xaml.FrameworkElement";
+            _typeNameTable[15] = "Windows.UI.Composition.DropShadow";
+            _typeNameTable[16] = "Windows.UI.Composition.CompositionShadow";
+            _typeNameTable[17] = "Windows.UI.Composition.CompositionObject";
+            _typeNameTable[18] = "Windows.UI.Composition.CompositionBrush";
+            _typeNameTable[19] = "MediaBrowser.BrowsePage";
+            _typeNameTable[20] = "Windows.UI.Xaml.Controls.Page";
+            _typeNameTable[21] = "Windows.UI.Xaml.Controls.UserControl";
+            _typeNameTable[22] = "MediaBrowser.EditingPage";
+            _typeNameTable[23] = "MediaBrowser.MainPage";
+            _typeNameTable[24] = "MediaBrowser.MediaPage";
 
-            _typeTable = new global::System.Type[6];
-            _typeTable[0] = typeof(global::MediaBrowser.BrowsePage);
-            _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
-            _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
-            _typeTable[3] = typeof(global::MediaBrowser.EditingPage);
-            _typeTable[4] = typeof(global::MediaBrowser.MainPage);
-            _typeTable[5] = typeof(global::MediaBrowser.MediaPage);
+            _typeTable = new global::System.Type[25];
+            _typeTable[0] = typeof(global::MediaBrowser.DataTemplates);
+            _typeTable[1] = typeof(global::Windows.UI.Xaml.ResourceDictionary);
+            _typeTable[2] = typeof(global::System.Object);
+            _typeTable[3] = typeof(global::Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView);
+            _typeTable[4] = typeof(global::Windows.UI.Xaml.Controls.GridView);
+            _typeTable[5] = typeof(global::Windows.UI.Xaml.Controls.ItemsControl);
+            _typeTable[6] = typeof(global::System.Double);
+            _typeTable[7] = typeof(global::System.Boolean);
+            _typeTable[8] = typeof(global::System.Windows.Input.ICommand);
+            _typeTable[9] = typeof(global::Windows.UI.Xaml.Controls.ItemsPanelTemplate);
+            _typeTable[10] = typeof(global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel);
+            _typeTable[11] = typeof(global::Windows.UI.Xaml.Controls.ContentControl);
+            _typeTable[12] = typeof(global::Windows.UI.Color);
+            _typeTable[13] = typeof(global::System.ValueType);
+            _typeTable[14] = typeof(global::Windows.UI.Xaml.FrameworkElement);
+            _typeTable[15] = typeof(global::Windows.UI.Composition.DropShadow);
+            _typeTable[16] = typeof(global::Windows.UI.Composition.CompositionShadow);
+            _typeTable[17] = typeof(global::Windows.UI.Composition.CompositionObject);
+            _typeTable[18] = typeof(global::Windows.UI.Composition.CompositionBrush);
+            _typeTable[19] = typeof(global::MediaBrowser.BrowsePage);
+            _typeTable[20] = typeof(global::Windows.UI.Xaml.Controls.Page);
+            _typeTable[21] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
+            _typeTable[22] = typeof(global::MediaBrowser.EditingPage);
+            _typeTable[23] = typeof(global::MediaBrowser.MainPage);
+            _typeTable[24] = typeof(global::MediaBrowser.MediaPage);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -181,10 +243,20 @@ namespace MediaBrowser.MediaBrowser_XamlTypeInfo
             return -1;
         }
 
-        private object Activate_0_BrowsePage() { return new global::MediaBrowser.BrowsePage(); }
-        private object Activate_3_EditingPage() { return new global::MediaBrowser.EditingPage(); }
-        private object Activate_4_MainPage() { return new global::MediaBrowser.MainPage(); }
-        private object Activate_5_MediaPage() { return new global::MediaBrowser.MediaPage(); }
+        private object Activate_0_DataTemplates() { return new global::MediaBrowser.DataTemplates(); }
+        private object Activate_3_AdaptiveGridView() { return new global::Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView(); }
+        private object Activate_10_DropShadowPanel() { return new global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel(); }
+        private object Activate_19_BrowsePage() { return new global::MediaBrowser.BrowsePage(); }
+        private object Activate_22_EditingPage() { return new global::MediaBrowser.EditingPage(); }
+        private object Activate_23_MainPage() { return new global::MediaBrowser.MainPage(); }
+        private object Activate_24_MediaPage() { return new global::MediaBrowser.MediaPage(); }
+        private void MapAdd_0_DataTemplates(object instance, object key, object item)
+        {
+            var collection = (global::System.Collections.Generic.IDictionary<global::System.Object, global::System.Object>)instance;
+            var newKey = (global::System.Object)key;
+            var newItem = (global::System.Object)item;
+            collection.Add(newKey, newItem);
+        }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -196,38 +268,148 @@ namespace MediaBrowser.MediaBrowser_XamlTypeInfo
             switch (typeIndex)
             {
 
-            case 0:   //  MediaBrowser.BrowsePage
-                userType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_0_BrowsePage;
+            case 0:   //  MediaBrowser.DataTemplates
+                userType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.ResourceDictionary"));
+                userType.Activator = Activate_0_DataTemplates;
+                userType.DictionaryAdd = MapAdd_0_DataTemplates;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 1:   //  Windows.UI.Xaml.Controls.Page
+            case 1:   //  Windows.UI.Xaml.ResourceDictionary
                 xamlType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 2:   //  Windows.UI.Xaml.Controls.UserControl
+            case 2:   //  Object
                 xamlType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 3:   //  MediaBrowser.EditingPage
+            case 3:   //  Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView
+                userType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.GridView"));
+                userType.Activator = Activate_3_AdaptiveGridView;
+                userType.AddMemberName("DesiredWidth");
+                userType.AddMemberName("StretchContentForSingleRow");
+                userType.AddMemberName("ItemClickCommand");
+                userType.AddMemberName("ItemHeight");
+                userType.AddMemberName("OneRowModeEnabled");
+                userType.AddMemberName("ItemsPanel");
+                xamlType = userType;
+                break;
+
+            case 4:   //  Windows.UI.Xaml.Controls.GridView
+                xamlType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 5:   //  Windows.UI.Xaml.Controls.ItemsControl
+                xamlType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 6:   //  Double
+                xamlType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 7:   //  Boolean
+                xamlType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 8:   //  System.Windows.Input.ICommand
+                userType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType(this, typeName, type, null);
+                userType.SetIsReturnTypeStub();
+                xamlType = userType;
+                break;
+
+            case 9:   //  Windows.UI.Xaml.Controls.ItemsPanelTemplate
+                xamlType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 10:   //  Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel
+                userType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.ContentControl"));
+                userType.Activator = Activate_10_DropShadowPanel;
+                userType.AddMemberName("BlurRadius");
+                userType.AddMemberName("ShadowOpacity");
+                userType.AddMemberName("OffsetX");
+                userType.AddMemberName("OffsetY");
+                userType.AddMemberName("Color");
+                userType.AddMemberName("CastingElement");
+                userType.AddMemberName("DropShadow");
+                userType.AddMemberName("Mask");
+                userType.AddMemberName("OffsetZ");
+                xamlType = userType;
+                break;
+
+            case 11:   //  Windows.UI.Xaml.Controls.ContentControl
+                xamlType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 12:   //  Windows.UI.Color
+                userType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
+                userType.SetIsReturnTypeStub();
+                xamlType = userType;
+                break;
+
+            case 13:   //  System.ValueType
+                userType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                xamlType = userType;
+                break;
+
+            case 14:   //  Windows.UI.Xaml.FrameworkElement
+                xamlType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 15:   //  Windows.UI.Composition.DropShadow
+                userType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Composition.CompositionShadow"));
+                userType.SetIsReturnTypeStub();
+                xamlType = userType;
+                break;
+
+            case 16:   //  Windows.UI.Composition.CompositionShadow
+                userType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Composition.CompositionObject"));
+                xamlType = userType;
+                break;
+
+            case 17:   //  Windows.UI.Composition.CompositionObject
+                userType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                xamlType = userType;
+                break;
+
+            case 18:   //  Windows.UI.Composition.CompositionBrush
+                userType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Composition.CompositionObject"));
+                userType.SetIsReturnTypeStub();
+                xamlType = userType;
+                break;
+
+            case 19:   //  MediaBrowser.BrowsePage
                 userType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_3_EditingPage;
+                userType.Activator = Activate_19_BrowsePage;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 4:   //  MediaBrowser.MainPage
+            case 20:   //  Windows.UI.Xaml.Controls.Page
+                xamlType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 21:   //  Windows.UI.Xaml.Controls.UserControl
+                xamlType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 22:   //  MediaBrowser.EditingPage
                 userType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_4_MainPage;
+                userType.Activator = Activate_22_EditingPage;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 5:   //  MediaBrowser.MediaPage
+            case 23:   //  MediaBrowser.MainPage
                 userType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_5_MediaPage;
+                userType.Activator = Activate_23_MainPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 24:   //  MediaBrowser.MediaPage
+                userType = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_24_MediaPage;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -235,12 +417,313 @@ namespace MediaBrowser.MediaBrowser_XamlTypeInfo
             return xamlType;
         }
 
+        private global::System.Collections.Generic.List<global::Windows.UI.Xaml.Markup.IXamlMetadataProvider> _otherProviders;
+        private global::System.Collections.Generic.List<global::Windows.UI.Xaml.Markup.IXamlMetadataProvider> OtherProviders
+        {
+            get
+            {
+                if(_otherProviders == null)
+                {
+                    var otherProviders = new global::System.Collections.Generic.List<global::Windows.UI.Xaml.Markup.IXamlMetadataProvider>();
+                    global::Windows.UI.Xaml.Markup.IXamlMetadataProvider provider;
+                    provider = new global::Microsoft.Toolkit.Uwp.UI.Controls.Microsoft_Toolkit_Uwp_UI_Controls_XamlTypeInfo.XamlMetaDataProvider() as global::Windows.UI.Xaml.Markup.IXamlMetadataProvider;
+                    otherProviders.Add(provider); 
+                    _otherProviders = otherProviders;
+                }
+                return _otherProviders;
+            }
+        }
 
+        private global::Windows.UI.Xaml.Markup.IXamlType CheckOtherMetadataProvidersForName(string typeName)
+        {
+            global::Windows.UI.Xaml.Markup.IXamlType xamlType = null;
+            global::Windows.UI.Xaml.Markup.IXamlType foundXamlType = null;
+            foreach(global::Windows.UI.Xaml.Markup.IXamlMetadataProvider xmp in OtherProviders)
+            {
+                xamlType = xmp.GetXamlType(typeName);
+                if(xamlType != null)
+                {
+                    if(xamlType.IsConstructible)    // not Constructible means it might be a Return Type Stub
+                    {
+                        return xamlType;
+                    }
+                    foundXamlType = xamlType;
+                }
+            }
+            return foundXamlType;
+        }
+
+        private global::Windows.UI.Xaml.Markup.IXamlType CheckOtherMetadataProvidersForType(global::System.Type type)
+        {
+            global::Windows.UI.Xaml.Markup.IXamlType xamlType = null;
+            global::Windows.UI.Xaml.Markup.IXamlType foundXamlType = null;
+            foreach(global::Windows.UI.Xaml.Markup.IXamlMetadataProvider xmp in OtherProviders)
+            {
+                xamlType = xmp.GetXamlType(type);
+                if(xamlType != null)
+                {
+                    if(xamlType.IsConstructible)    // not Constructible means it might be a Return Type Stub
+                    {
+                        return xamlType;
+                    }
+                    foundXamlType = xamlType;
+                }
+            }
+            return foundXamlType;
+        }
+
+        private object get_0_AdaptiveGridView_DesiredWidth(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView)instance;
+            return that.DesiredWidth;
+        }
+        private void set_0_AdaptiveGridView_DesiredWidth(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView)instance;
+            that.DesiredWidth = (global::System.Double)Value;
+        }
+        private object get_1_AdaptiveGridView_StretchContentForSingleRow(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView)instance;
+            return that.StretchContentForSingleRow;
+        }
+        private void set_1_AdaptiveGridView_StretchContentForSingleRow(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView)instance;
+            that.StretchContentForSingleRow = (global::System.Boolean)Value;
+        }
+        private object get_2_AdaptiveGridView_ItemClickCommand(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView)instance;
+            return that.ItemClickCommand;
+        }
+        private void set_2_AdaptiveGridView_ItemClickCommand(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView)instance;
+            that.ItemClickCommand = (global::System.Windows.Input.ICommand)Value;
+        }
+        private object get_3_AdaptiveGridView_ItemHeight(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView)instance;
+            return that.ItemHeight;
+        }
+        private void set_3_AdaptiveGridView_ItemHeight(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView)instance;
+            that.ItemHeight = (global::System.Double)Value;
+        }
+        private object get_4_AdaptiveGridView_OneRowModeEnabled(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView)instance;
+            return that.OneRowModeEnabled;
+        }
+        private void set_4_AdaptiveGridView_OneRowModeEnabled(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView)instance;
+            that.OneRowModeEnabled = (global::System.Boolean)Value;
+        }
+        private object get_5_AdaptiveGridView_ItemsPanel(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView)instance;
+            return that.ItemsPanel;
+        }
+        private object get_6_DropShadowPanel_BlurRadius(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel)instance;
+            return that.BlurRadius;
+        }
+        private void set_6_DropShadowPanel_BlurRadius(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel)instance;
+            that.BlurRadius = (global::System.Double)Value;
+        }
+        private object get_7_DropShadowPanel_ShadowOpacity(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel)instance;
+            return that.ShadowOpacity;
+        }
+        private void set_7_DropShadowPanel_ShadowOpacity(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel)instance;
+            that.ShadowOpacity = (global::System.Double)Value;
+        }
+        private object get_8_DropShadowPanel_OffsetX(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel)instance;
+            return that.OffsetX;
+        }
+        private void set_8_DropShadowPanel_OffsetX(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel)instance;
+            that.OffsetX = (global::System.Double)Value;
+        }
+        private object get_9_DropShadowPanel_OffsetY(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel)instance;
+            return that.OffsetY;
+        }
+        private void set_9_DropShadowPanel_OffsetY(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel)instance;
+            that.OffsetY = (global::System.Double)Value;
+        }
+        private object get_10_DropShadowPanel_Color(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel)instance;
+            return that.Color;
+        }
+        private void set_10_DropShadowPanel_Color(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel)instance;
+            that.Color = (global::Windows.UI.Color)Value;
+        }
+#pragma warning disable 0618  //   Warning on Deprecated usage
+        private object get_11_DropShadowPanel_CastingElement(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel)instance;
+            return that.CastingElement;
+        }
+        private void set_11_DropShadowPanel_CastingElement(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel)instance;
+            that.CastingElement = (global::Windows.UI.Xaml.FrameworkElement)Value;
+        }
+#pragma warning restore 0618
+        private object get_12_DropShadowPanel_DropShadow(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel)instance;
+            return that.DropShadow;
+        }
+        private object get_13_DropShadowPanel_Mask(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel)instance;
+            return that.Mask;
+        }
+        private void set_13_DropShadowPanel_Mask(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel)instance;
+            that.Mask = (global::Windows.UI.Composition.CompositionBrush)Value;
+        }
+        private object get_14_DropShadowPanel_OffsetZ(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel)instance;
+            return that.OffsetZ;
+        }
+        private void set_14_DropShadowPanel_OffsetZ(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel)instance;
+            that.OffsetZ = (global::System.Double)Value;
+        }
 
         private global::Windows.UI.Xaml.Markup.IXamlMember CreateXamlMember(string longMemberName)
         {
             global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlMember xamlMember = null;
-            // No Local Properties
+            global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType userType;
+
+            switch (longMemberName)
+            {
+            case "Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView.DesiredWidth":
+                userType = (global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView");
+                xamlMember = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlMember(this, "DesiredWidth", "Double");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_0_AdaptiveGridView_DesiredWidth;
+                xamlMember.Setter = set_0_AdaptiveGridView_DesiredWidth;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView.StretchContentForSingleRow":
+                userType = (global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView");
+                xamlMember = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlMember(this, "StretchContentForSingleRow", "Boolean");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_1_AdaptiveGridView_StretchContentForSingleRow;
+                xamlMember.Setter = set_1_AdaptiveGridView_StretchContentForSingleRow;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView.ItemClickCommand":
+                userType = (global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView");
+                xamlMember = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlMember(this, "ItemClickCommand", "System.Windows.Input.ICommand");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_2_AdaptiveGridView_ItemClickCommand;
+                xamlMember.Setter = set_2_AdaptiveGridView_ItemClickCommand;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView.ItemHeight":
+                userType = (global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView");
+                xamlMember = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlMember(this, "ItemHeight", "Double");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_3_AdaptiveGridView_ItemHeight;
+                xamlMember.Setter = set_3_AdaptiveGridView_ItemHeight;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView.OneRowModeEnabled":
+                userType = (global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView");
+                xamlMember = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlMember(this, "OneRowModeEnabled", "Boolean");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_4_AdaptiveGridView_OneRowModeEnabled;
+                xamlMember.Setter = set_4_AdaptiveGridView_OneRowModeEnabled;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView.ItemsPanel":
+                userType = (global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView");
+                xamlMember = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlMember(this, "ItemsPanel", "Windows.UI.Xaml.Controls.ItemsPanelTemplate");
+                xamlMember.Getter = get_5_AdaptiveGridView_ItemsPanel;
+                xamlMember.SetIsReadOnly();
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel.BlurRadius":
+                userType = (global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel");
+                xamlMember = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlMember(this, "BlurRadius", "Double");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_6_DropShadowPanel_BlurRadius;
+                xamlMember.Setter = set_6_DropShadowPanel_BlurRadius;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel.ShadowOpacity":
+                userType = (global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel");
+                xamlMember = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlMember(this, "ShadowOpacity", "Double");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_7_DropShadowPanel_ShadowOpacity;
+                xamlMember.Setter = set_7_DropShadowPanel_ShadowOpacity;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel.OffsetX":
+                userType = (global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel");
+                xamlMember = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlMember(this, "OffsetX", "Double");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_8_DropShadowPanel_OffsetX;
+                xamlMember.Setter = set_8_DropShadowPanel_OffsetX;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel.OffsetY":
+                userType = (global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel");
+                xamlMember = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlMember(this, "OffsetY", "Double");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_9_DropShadowPanel_OffsetY;
+                xamlMember.Setter = set_9_DropShadowPanel_OffsetY;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel.Color":
+                userType = (global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel");
+                xamlMember = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlMember(this, "Color", "Windows.UI.Color");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_10_DropShadowPanel_Color;
+                xamlMember.Setter = set_10_DropShadowPanel_Color;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel.CastingElement":
+                userType = (global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel");
+                xamlMember = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlMember(this, "CastingElement", "Windows.UI.Xaml.FrameworkElement");
+                xamlMember.Getter = get_11_DropShadowPanel_CastingElement;
+                xamlMember.Setter = set_11_DropShadowPanel_CastingElement;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel.DropShadow":
+                userType = (global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel");
+                xamlMember = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlMember(this, "DropShadow", "Windows.UI.Composition.DropShadow");
+                xamlMember.Getter = get_12_DropShadowPanel_DropShadow;
+                xamlMember.SetIsReadOnly();
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel.Mask":
+                userType = (global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel");
+                xamlMember = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlMember(this, "Mask", "Windows.UI.Composition.CompositionBrush");
+                xamlMember.Getter = get_13_DropShadowPanel_Mask;
+                xamlMember.Setter = set_13_DropShadowPanel_Mask;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel.OffsetZ":
+                userType = (global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.DropShadowPanel");
+                xamlMember = new global::MediaBrowser.MediaBrowser_XamlTypeInfo.XamlMember(this, "OffsetZ", "Double");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_14_DropShadowPanel_OffsetZ;
+                xamlMember.Setter = set_14_DropShadowPanel_OffsetZ;
+                break;
+            }
             return xamlMember;
         }
     }

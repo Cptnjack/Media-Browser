@@ -6,100 +6,531 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:data="using:MediaBrowser.Models"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
 
     <Page.Resources>
-        <DataTemplate                             x:Key="MediaDataTemplate">
-            <StackPanel x:ConnectionId='2'  Margin="20,20,20,20">
-                <Image x:ConnectionId='3' Width="150" Height="225"                              Stretch="Fill"  HorizontalAlignment="Center" />
-                <TextBlock x:ConnectionId='4' FontSize="16"                       HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="Wheat"/>
-            </StackPanel>
-        </DataTemplate>
+        <ResourceDictionary>
+            <DataTemplate                             x:Key="ListViewWithCovers">
+                <Grid x:ConnectionId='9' Background="{ThemeResource BackgroundThemeBrush}" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Image x:ConnectionId='10' Name="ListCoverImages"                              Stretch="UniformToFill" Margin="20,10,0,10" Height="300" Width="225"></Image>
+                    <TextBlock x:ConnectionId='11' Name="ListTitles"                       Grid.Column="1" VerticalAlignment="Center" Margin="20,0,0,0" FontSize="24" TextWrapping="Wrap"></TextBlock>
+                    <TextBlock x:ConnectionId='12'                                   Grid.Column="2" HorizontalAlignment="Center" FontSize="24" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:ConnectionId='13'                               Grid.Column="3" HorizontalAlignment="Center" FontSize="24" VerticalAlignment="Center"></TextBlock>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate                             x:Key="ListViewWithoutCovers">
+                <Grid x:ConnectionId='5' Background="{ThemeResource BackgroundThemeBrush}" BorderBrush="Gray" Height="100" BorderThickness="1" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:ConnectionId='6'                       Grid.Column="0" VerticalAlignment="Center" Margin="100,0,0,0" FontSize="24" TextWrapping="Wrap"></TextBlock>
+                    <TextBlock x:ConnectionId='7'                                   Grid.Column="2" HorizontalAlignment="Center" FontSize="24" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:ConnectionId='8'                               Grid.Column="3" HorizontalAlignment="Center" FontSize="24" VerticalAlignment="Center"></TextBlock>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate                             x:Key="IconTemplate">
+                <Image x:ConnectionId='4'                              Stretch="UniformToFill"></Image>
+                <!--<TextBlock FontSize="16" Text="{x:Bind Title}" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="GhostWhite"/>-->
+            </DataTemplate>
+            <DataTemplate                             x:Key="MediaListTemplate">
+                <Grid Background="#FF1D1D1D" HorizontalAlignment="Stretch">
+                    <!--<TextBlock FontSize="16" Text="{x:Bind Title}" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="GhostWhite"/>-->
+                </Grid>
+            </DataTemplate>
+            <DataTemplate                            x:Key="DirTemplate">
+                <Grid x:ConnectionId='2' Background="#FF1D1D1D">
+                    <TextBlock x:ConnectionId='3'                              ></TextBlock>
+                    <!--<TextBlock FontSize="16" Text="{x:Bind Title}" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="GhostWhite"/>-->
+                </Grid>
+            </DataTemplate>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="AdaptiveGridItemTemplate.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary Source="LightThemeDictionary.xaml" x:Key="Light"/>
+                <ResourceDictionary Source="DarkThemeDictionary.xaml" x:Key="Dark"/>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
     </Page.Resources>
 
-    <Grid Background="#FF1D1D1D">
+    <Grid Background="{ThemeResource BackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <RelativePanel>
-            <TextBox x:ConnectionId='12' Name="SearchBox" Height="25" Width="300" FontSize="24" RelativePanel.AlignLeftWithPanel="True" Margin="50,25,0,0" FontFamily="Segoe MDL2 Assets" PlaceholderText="&#xE1A3;" Background="#FFC4C4C4"/>
-            <ComboBox x:ConnectionId='13' Name="SortBox"                                             RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWith="SearchBox" Margin="0,25,100,0" MinWidth="110" MaxHeight="28" FontSize="12" Background="#FFC4C4C4">
-                <ComboBoxItem Content="Alphabetical" IsSelected="True"/>
-                <ComboBoxItem Content="Rating" />
-                <ComboBoxItem Content="Season" />
-            </ComboBox>
 
-            <ComboBox x:ConnectionId='14' Name="ViewStyleBox"                                                  RelativePanel.LeftOf="SortBox" RelativePanel.AlignVerticalCenterWith="SearchBox" Margin="0,25,20,0" Background="#FFC4C4C4" FontSize="12" MaxHeight="28">
-                <ComboBoxItem Content="Tile" IsSelected="True"/>
-                <ComboBoxItem Content="List" />
-            </ComboBox>
+        <Grid Grid.Row="0" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
 
-            <ToggleButton x:ConnectionId='15' Name="FilterButton" FontFamily="Segoe MDL2 Assets" Content="&#xE16E;" FontSize="10"                            RelativePanel.LeftOf="ViewStyleBox" RelativePanel.AlignVerticalCenterWith="SearchBox" Margin="0,25,20,0" Background="#FFC4C4C4"/>
 
-            <Line X1="0" X2="10000" Y1="0" Y2="0" Stroke="Gray" Fill="LightGray" StrokeThickness="5" StrokeEndLineCap="Round" StrokeStartLineCap="Round" RelativePanel.Below="SearchBox" Margin="0,20,0,0" />
-        </RelativePanel>
+            <Popup x:ConnectionId='75' Name="ErrorPopup" IsLightDismissEnabled="False"                                     >
+                <RelativePanel x:ConnectionId='114' Name="ErrorsPanel" Width="500" Height="350" Background="{ThemeResource BackgroundThemeBrush}" BorderBrush="Gray" BorderThickness="2">
+                    <TextBlock x:ConnectionId='115' Name="FailedImportsText" Text="Failed Imports"  RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignTopWithPanel="True" Margin="0,20,0,20"></TextBlock>
+                    <ListView x:ConnectionId='116'     Name="ErrorsListView"
+                                      RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                      RelativePanel.Below="FailedImportsText"
+                                      Height="200"
+                                      Width="400"
+                                      SelectionMode="None"
+                                      Background="{ThemeResource BackgroundThemeBrush}"
+                                      RequestedTheme="Dark"
+                                      Margin="20,0,0,20"
+                                      BorderBrush="Gray"
+                                      BorderThickness="1"
+                                                                     >
+                    </ListView>
+                    <Button x:ConnectionId='117' Name="Okay"                    Content="Okay" Margin="58,0,0,0" RelativePanel.Below="ErrorsListView" RelativePanel.AlignLeftWithPanel="True"></Button>
+                </RelativePanel>
+            </Popup>
+            <Popup x:ConnectionId='76' Name="NotificationPopup" IsLightDismissEnabled="False"                                            >
+                <StackPanel x:ConnectionId='110' Name="NotificationsPanel" Width="400" Height="250" Orientation="Vertical" Background="{ThemeResource BackgroundThemeBrush}" BorderBrush="Gray" BorderThickness="2">
+                    <TextBlock Text="Notification"  HorizontalAlignment="Center" Margin="0,20,0,20"></TextBlock>
+                    <TextBlock x:ConnectionId='111' Name="NotificationText" Width="300" HorizontalAlignment="Stretch" TextWrapping="Wrap"></TextBlock>
+                    <RelativePanel HorizontalAlignment="Center" Width="200" Margin="0,20,0,0">
+                        <Button x:ConnectionId='112' Name="Confirmation"                            Content="Confirm" Margin="20,0,0,0"></Button>
+                        <Button x:ConnectionId='113' Name="Cancel" Content="Cancel"                      Margin="20,0,0,0" RelativePanel.RightOf="Confirmation" RelativePanel.AlignVerticalCenterWith="Confirmation"></Button>
+                    </RelativePanel>
+                </StackPanel>
+            </Popup>
+            <Popup x:ConnectionId='77' Name="SettingsPopup" IsOpen="False" IsLightDismissEnabled="False"                                        >
+                <RelativePanel x:ConnectionId='78' Name="SettingsPanel" BorderBrush="Gray" BorderThickness="2">
+                    <RelativePanel x:ConnectionId='79' Name="MediaManagerPanel" MinWidth="500" MinHeight="300" MaxWidth="500" MaxHeight="500" Background="{ThemeResource BackgroundThemeBrush}">
+                        <Button x:ConnectionId='100' Name="MediaTabButton" Content="Media Directories"                              FontSize="12" Margin="10,10,0,10" Background="{ThemeResource BackgroundThemeBrush}" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True"></Button>
+                        <Button x:ConnectionId='101' Name="ExclusionTabButton" Content="Excluded Media"                                  FontSize="12" Margin="10,10,0,10" Background="{ThemeResource BackgroundThemeBrush}" RelativePanel.AlignTopWithPanel="True" RelativePanel.RightOf="MediaTabButton"></Button>
+                        <Button x:ConnectionId='102' Name="TagsTabButton" Content="Tags"                              FontSize="12" Margin="10,10,0,10" Background="{ThemeResource BackgroundThemeBrush}" RelativePanel.AlignTopWithPanel="True" RelativePanel.RightOf="ExclusionTabButton"></Button>
+                        <Button x:ConnectionId='103' Name="ExitSettingsPopupButton" FontFamily="Segoe MDL2 Assets" Content="&#xE10A;" FontSize="16"                                       Margin="0,10,10,0" Foreground="{ThemeResource ForegroundThemeBrush}" Background="{ThemeResource BackgroundThemeBrush}" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                        <TextBlock x:ConnectionId='104' Name="MediaManagerText" Text="Imported Directories" FontSize="26" Margin="0,0,0,0" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="MediaTabButton"></TextBlock>
+                        <!--<ToggleButton Name="MediaPageToggleButton" Content="Disable Media Pages" Click="MediaPageToggleButton_Click" Margin="0,0,0,20" Foreground="{ThemeResource ForegroundThemeBrush}" Background="Gray" RelativePanel.Below="MediaManagerText" RelativePanel.AlignHorizontalCenterWithPanel="True"></ToggleButton>-->
+                        <ListView x:ConnectionId='105'     Name="MediaDirListView"
+                                      RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                      RelativePanel.Below="MediaManagerText"
+                                      Height="200"
+                                      Width="400"
+                                      SelectionMode="Single"
+                                      Background="{ThemeResource BackgroundThemeBrush}"
+                                      RequestedTheme="Dark"
+                                      Margin="0,20,0,0"
+                                      BorderBrush="Gray"
+                                      BorderThickness="1"
+                                                                      
+                                      ItemTemplate="{StaticResource DirTemplate}">
+                        </ListView>
+                        <StackPanel x:ConnectionId='106' Name="MediaManagerButtonsPanel" Orientation="Horizontal" RelativePanel.Below="MediaDirListView" RelativePanel.AlignLeftWithPanel="True" Margin="50,20,0,20">
+                            <Button x:ConnectionId='107' Name="DeleteMediaDirButton" Content="Delete"                                    FontSize="12" Foreground="{ThemeResource ForegroundThemeBrush}" Background="Gray" Margin="0,0,0,0"></Button>
+                            <Button x:ConnectionId='108' Name="AddMediaDirButton" Content="Add"                                 FontSize="12" Foreground="{ThemeResource ForegroundThemeBrush}" Background="Gray" Margin="20,0,0,0"></Button>
+                            <Button x:ConnectionId='109' Name="RescanMediaDirButton" Content="Rescan All Directories"                                    FontSize="12" Foreground="{ThemeResource ForegroundThemeBrush}" Background="Gray" Margin="20,0,0,0"></Button>
+                        </StackPanel>
+                    </RelativePanel>
+                    <RelativePanel x:ConnectionId='80' Name="ExclusionManagerPanel" MinWidth="500" MinHeight="300" MaxWidth="500" MaxHeight="500" Background="{ThemeResource BackgroundThemeBrush}">
+                        <Button x:ConnectionId='92' Name="MediaTabButton3" Content="Media Directories"                              FontSize="12" Margin="10,10,0,10" Background="{ThemeResource BackgroundThemeBrush}" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True"></Button>
+                        <Button x:ConnectionId='93' Name="ExclusionTabButton3" Content="Excluded Media"                                  FontSize="12" Margin="10,10,0,10" Background="{ThemeResource BackgroundThemeBrush}" RelativePanel.AlignTopWithPanel="True" RelativePanel.RightOf="MediaTabButton3"></Button>
+                        <Button x:ConnectionId='94' Name="TagsTabButton3" Content="Tags"                              FontSize="12" Margin="10,10,0,10" Background="{ThemeResource BackgroundThemeBrush}" RelativePanel.AlignTopWithPanel="True" RelativePanel.RightOf="ExclusionTabButton3"></Button>
+                        <Button x:ConnectionId='95' Name="ExitSettingsPopupButton3" FontFamily="Segoe MDL2 Assets" Content="&#xE10A;" FontSize="16"                                       Margin="0,10,10,0" Foreground="{ThemeResource ForegroundThemeBrush}" Background="{ThemeResource BackgroundThemeBrush}" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                        <TextBlock x:ConnectionId='96' Name="ExclusionManagerText" Text="Excluded Media" FontSize="26" Margin="0,0,0,0" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="MediaTabButton3"></TextBlock>
+                        <!--<ToggleButton Name="MediaPageToggleButton" Content="Disable Media Pages" Click="MediaPageToggleButton_Click" Margin="0,0,0,20" Foreground="{ThemeResource ForegroundThemeBrush}" Background="Gray" RelativePanel.Below="MediaManagerText" RelativePanel.AlignHorizontalCenterWithPanel="True"></ToggleButton>-->
+                        <ListView x:ConnectionId='97'     Name="ExcludedMediaListView"
+                                      RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                      RelativePanel.Below="ExclusionManagerText"
+                                      Height="200"
+                                      Width="400"
+                                      SelectionMode="Single"
+                                      Background="{ThemeResource BackgroundThemeBrush}"
+                                      RequestedTheme="Dark"
+                                      Margin="0,20,0,0"
+                                      BorderBrush="Gray"
+                                      BorderThickness="1"
+                                                                             >
+                        </ListView>
+                        <StackPanel x:ConnectionId='98' Name="ExclusionManagerButtonsPanel" Orientation="Horizontal" RelativePanel.Below="ExcludedMediaListView" RelativePanel.AlignLeftWithPanel="True" Margin="50,20,0,20">
+                            <Button x:ConnectionId='99' Name="RemoveExclusionButton" Content="Remove"                                     FontSize="12" Foreground="{ThemeResource ForegroundThemeBrush}" Background="Gray" Margin="0,0,0,0"></Button>
+                        </StackPanel>
+                    </RelativePanel>
+                    <RelativePanel x:ConnectionId='81' Name="TagsManagerPanel" MinWidth="500" MinHeight="300" MaxWidth="500" MaxHeight="500" Background="{ThemeResource BackgroundThemeBrush}">
+                        <Button x:ConnectionId='82' Name="MediaTabButton2" Content="Media Directories"                              FontSize="12" Margin="10,10,0,10" Background="{ThemeResource BackgroundThemeBrush}" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True"></Button>
+                        <Button x:ConnectionId='83' Name="ExclusionTabButton2" Content="Excluded Media"                                  FontSize="12" Margin="10,10,0,10" Background="{ThemeResource BackgroundThemeBrush}" RelativePanel.AlignTopWithPanel="True" RelativePanel.RightOf="MediaTabButton2"></Button>
+                        <Button x:ConnectionId='84' Name="TagsTabButton2" Content="Tags"                              FontSize="12" Margin="10,10,0,10" Background="{ThemeResource BackgroundThemeBrush}" RelativePanel.AlignTopWithPanel="True" RelativePanel.RightOf="ExclusionTabButton2"></Button>
+                        <Button x:ConnectionId='85' Name="ExitSettingsPopupButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE10A;" FontSize="16"                                       Margin="0,10,10,0" Foreground="{ThemeResource ForegroundThemeBrush}" Background="{ThemeResource BackgroundAccentThemeBrush}" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                        <TextBlock x:ConnectionId='86' Name="TagsText" Text="Tags" FontSize="26" Margin="0,0,0,0" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="MediaTabButton2"></TextBlock>
+                        <!--<ToggleButton Name="MediaPageToggleButton" Content="Disable Media Pages" Click="MediaPageToggleButton_Click" Margin="0,0,0,20" Foreground="{ThemeResource ForegroundThemeBrush}" Background="Gray" RelativePanel.Below="MediaManagerText" RelativePanel.AlignHorizontalCenterWithPanel="True"></ToggleButton>-->
+                        <ListView x:ConnectionId='87'     Name="TagsListView"
+                                      RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                      RelativePanel.Below="TagsText"
+                                      MaxHeight="200"
+                                      Width="400"
+                                      SelectionMode="Single"
+                                      Background="{ThemeResource BackgroundThemeBrush}"
+                                      RequestedTheme="Dark"
+                                      Margin="0,20,0,0"
+                                      BorderBrush="Gray"
+                                      BorderThickness="1"
+                                                                     >
+                        </ListView>
+                        <StackPanel x:ConnectionId='88' Name="TagsButtonsPanel" Orientation="Horizontal" RelativePanel.Below="TagsListView" RelativePanel.AlignLeftWithPanel="True" Margin="50,20,0,15">
+                            <Button x:ConnectionId='89' Name="DeleteTagButton" Content="Delete"                               FontSize="12" Foreground="{ThemeResource ForegroundThemeBrush}" Background="Gray" Margin="0,0,0,0"></Button>
+                            <Button x:ConnectionId='90' Name="AddTagButton" Content="Add"                            FontSize="12" Foreground="{ThemeResource ForegroundThemeBrush}" Background="Gray" Margin="20,0,0,0"></Button>
+                            <TextBox x:ConnectionId='91' Name="TagsAddBox" FontSize="16" Width="150" Margin="10,0,0,0" Foreground="{ThemeResource ForegroundThemeBrush}" Background="{ThemeResource BackgroundThemeBrush}"></TextBox>
+                        </StackPanel>
+                    </RelativePanel>
+                </RelativePanel>
+            </Popup>
+        </Grid>
 
-        <SplitView x:ConnectionId='5' Name="MySplitView" 
+        <Grid Grid.Row="0">
+            <Popup x:ConnectionId='43' Name="CompactMediaPopup" IsOpen="False" IsLightDismissEnabled="False"                                >
+                <RelativePanel x:ConnectionId='44' Name="CompactMediaPanel" BorderBrush="Gray" BorderThickness="1" Background="{ThemeResource BackgroundAccentThemeBrush}" Height="350" Width="1000">
+                    <RelativePanel x:ConnectionId='45' Name="InfoPanel" BorderBrush="Gray" BorderThickness="1" Width="250"  Grid.Row="1" Background="{ThemeResource BackgroundAccentThemeBrush}">
+                        <StackPanel x:ConnectionId='57' Name="InfoTitleViewBox" Width="250"  RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True">
+                            <RelativePanel  BorderBrush="Gray" BorderThickness="0,0,0,1" MinWidth="200">
+                                <TextBlock x:ConnectionId='73' Name="InformationName"  Text="Information" FontSize="26" Foreground="{ThemeResource ForegroundThemeBrush}" Margin="10,0,0,10"  Padding="0,20,0,0"></TextBlock>
+                                <ToggleButton x:ConnectionId='74' Name="InfoEditButton" FontFamily="Segoe MDL2 Assets" Content="&#xE104;" FontSize="10"                              Margin="10,0,0,0" Foreground="{ThemeResource ForegroundThemeBrush}" Background="{ThemeResource BackgroundAccentThemeBrush}" RelativePanel.RightOf="InformationName" RelativePanel.AlignVerticalCenterWith="InformationName"/>
+                            </RelativePanel>
+                        </StackPanel>
+
+                        <TextBlock x:ConnectionId='58' Name="TitleName" Text="Title :" FontSize="16" Foreground="{ThemeResource ForegroundThemeBrush}" RelativePanel.Below="InfoTitleViewBox" Margin="10,15,0,0"></TextBlock>
+                        <TextBlock x:ConnectionId='59' Name="TitleTextBlock" TextWrapping="Wrap" Text="" FontSize="16" Foreground="{ThemeResource ForegroundThemeBrush}" RelativePanel.RightOf="TitleName" RelativePanel.AlignTopWith="TitleName"  Margin="10,15,30,0" ></TextBlock>
+                        <TextBox x:ConnectionId='60' Name="TitleBox" Text="" IsReadOnly="False" Visibility="Collapsed"  MaxLength="40"  FontSize="16" Foreground="{ThemeResource ForegroundThemeBrush}" RelativePanel.RightOf="TitleName" RelativePanel.AlignTopWith="TitleName"  Margin="10,12,30,0" Background="Gray" BorderThickness="0" ></TextBox>
+
+                        <TextBlock x:ConnectionId='61' Name="VideosCountName" Text="Episodes :" FontSize="16" Foreground="{ThemeResource ForegroundThemeBrush}" RelativePanel.Below="TitleTextBlock" Margin="10,15,0,0"></TextBlock>
+                        <TextBlock x:ConnectionId='62' Name="VideosCountBox" Text="" FontSize="16" Foreground="{ThemeResource ForegroundThemeBrush}" RelativePanel.RightOf="VideosCountName" RelativePanel.AlignTopWith="VideosCountName"  Margin="10,15,30,0" ></TextBlock>
+
+                        <TextBlock x:ConnectionId='63' Name="RatingName" Text="Rating :" FontSize="16" Foreground="{ThemeResource ForegroundThemeBrush}" RelativePanel.Below="VideosCountName" Margin="10,15,0,0"></TextBlock>
+                        <TextBlock x:ConnectionId='64' Name="RatingTextBlock" Text="" FontSize="16" Foreground="{ThemeResource ForegroundThemeBrush}" RelativePanel.RightOf="RatingName" RelativePanel.AlignTopWith="RatingName"  Margin="10,15,30,0" ></TextBlock>
+                        <TextBox x:ConnectionId='65' Name="RatingBox" PlaceholderText="0.00 - 10.00" Text="" IsReadOnly="False" Visibility="Collapsed"  MaxLength="4"  FontSize="16" Foreground="{ThemeResource ForegroundThemeBrush}" RelativePanel.RightOf="RatingName" RelativePanel.AlignTopWith="RatingName"  Margin="10,12,30,0" Background="Gray" BorderThickness="0" ></TextBox>
+
+                        <TextBlock x:ConnectionId='66' Name="LinkName" Text="External Link :" FontSize="16" Foreground="{ThemeResource ForegroundThemeBrush}" RelativePanel.Below="RatingName" Margin="10,15,0,0" Padding="0,0,0,10"></TextBlock>
+                        <TextBlock x:ConnectionId='67' Name="LinkTextBlock" FontSize="16" Foreground="{ThemeResource ForegroundThemeBrush}" RelativePanel.RightOf="LinkName" RelativePanel.AlignTopWith="LinkName"  Margin="10,15,30,0"></TextBlock>
+                        <TextBox x:ConnectionId='68' Name="LinkBox" PlaceholderText="Not Set" Visibility="Collapsed" FontSize="16" Foreground="{ThemeResource ForegroundThemeBrush}" RelativePanel.RightOf="LinkName" RelativePanel.AlignTopWith="LinkName"  Margin="10,12,30,0" Background="Gray" BorderThickness="0" MinWidth="160" ></TextBox>
+                        <HyperlinkButton x:ConnectionId='69' Name="LinkHyperLink" Content="Open Browser" Visibility="Collapsed" Foreground="{ThemeResource ForegroundThemeBrush}" NavigateUri="" RelativePanel.RightOf="LinkName" RelativePanel.AlignTopWith="LinkName" Margin="10,10,0,0"/>
+
+                        <RelativePanel RelativePanel.Below="LinkName" >
+                            <TextBlock x:ConnectionId='70' Name="TagsName" Text="Tags :" FontSize="16" Foreground="{ThemeResource ForegroundThemeBrush}" Margin="10,10,0,0"></TextBlock>
+
+                            <ListView x:ConnectionId='71' Name="ShowTagsListView"
+                                      SelectionMode="None"
+                                      IsItemClickEnabled="False"
+                                      RelativePanel.RightOf="TagsName"
+                                      FontSize="6"
+                                      Background="{ThemeResource BackgroundAccentThemeBrush}"
+                                      RequestedTheme="Dark"
+                                      Margin="0,0,0,0"
+                                      Height="350"
+                                      HorizontalAlignment="Stretch"             
+                                                                              >
+                            </ListView>
+
+                            <Button x:ConnectionId='72' Name="EditShowTagsButton" Content="Edit" FontSize="16" Visibility="Collapsed" Margin="10,5,0,0"                                  RelativePanel.RightOf="TagsName"></Button>
+                        </RelativePanel>
+                    </RelativePanel>
+
+                    <ScrollViewer x:ConnectionId='46' Name="VideoListScrollPanel" RelativePanel.RightOf="InfoPanel" RelativePanel.LeftOf="OptionsRelativePanel" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <StackPanel x:ConnectionId='56' Name="VideoListPanel" Orientation="Vertical">
+                        </StackPanel>
+                    </ScrollViewer>
+                    <RelativePanel x:ConnectionId='47' Name="OptionsRelativePanel" Grid.Column="2" Width="250" Background="{ThemeResource BackgroundAccentThemeBrush}" Height="350" BorderBrush="Gray" BorderThickness="1" RelativePanel.AlignRightWithPanel="True">
+                        <Button x:ConnectionId='48' Name="ExitCompactMediaPageButton" FontFamily="Segoe MDL2 Assets" Content="&#xE10A;" FontSize="16"                                          Margin="10,0,0,0" Foreground="{ThemeResource ForegroundThemeBrush}" Background="{ThemeResource BackgroundAccentThemeBrush}" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                        <RelativePanel x:ConnectionId='49' Name="OptionsPanel" BorderBrush="Gray" BorderThickness="0,0,0,0" RelativePanel.AlignHorizontalCenterWithPanel="True">
+                            <TextBlock x:ConnectionId='55' Name="OptionsName"  Text="Options" FontSize="26" Foreground="{ThemeResource ForegroundThemeBrush}" Margin="0,0,0,10"  Padding="0,20,0,0"></TextBlock>
+                        </RelativePanel>
+                        <StackPanel Orientation="Vertical" Width="250" RelativePanel.Below="OptionsPanel" BorderBrush="Gray" BorderThickness="0,1,0,0">
+                            <RelativePanel x:ConnectionId='50' Name="OptionChoicesPanel" RelativePanel.Below="OptionsPanel">
+
+                                <ToggleButton x:ConnectionId='51' Name="FavoriteButton"                                                                       FontFamily="Segoe MDL2 Assets" Content="&#xE006;" FontSize="24" Foreground="{ThemeResource ForegroundThemeBrush}" Background="{ThemeResource BackgroundAccentThemeBrush}" Margin="10,20,0,0"></ToggleButton>
+                                <TextBlock x:ConnectionId='52' Name="FavoriteName" FontSize="16" Foreground="{ThemeResource ForegroundThemeBrush}" Text="Add Show to Favorites" RelativePanel.RightOf="FavoriteButton" RelativePanel.AlignVerticalCenterWith="FavoriteButton" Margin="10,20,10,0"></TextBlock>
+
+                                <Button x:ConnectionId='53' Name="DeleteButton"                            FontFamily="Segoe MDL2 Assets" Content="&#xE107;" FontSize="24" Foreground="{ThemeResource ForegroundThemeBrush}" Background="{ThemeResource BackgroundAccentThemeBrush}" Margin="10,20,0,0" RelativePanel.Below="FavoriteButton"></Button>
+                                <TextBlock x:ConnectionId='54' Name="DeleteName" FontSize="16" Foreground="{ThemeResource ForegroundThemeBrush}" Text="Remove Show" RelativePanel.RightOf="DeleteButton" RelativePanel.AlignVerticalCenterWith="DeleteButton" Margin="10,20,0,0"></TextBlock>
+                            </RelativePanel>
+                        </StackPanel>
+                    </RelativePanel>
+                </RelativePanel>
+            </Popup>
+        </Grid>
+
+        <Grid Grid.Row="0">
+            <Popup x:ConnectionId='34' Name="EditTagsPopup" IsOpen="False" IsLightDismissEnabled="False"                                     >
+                <RelativePanel x:ConnectionId='35' Name="EditTagsPanel" MaxHeight="350" Width="600" BorderBrush="Gray" BorderThickness="1" Background="{ThemeResource BackgroundAccentThemeBrush}">
+                    <TextBlock x:ConnectionId='36' Name="AllTagsText" Text="All Tags" FontSize="20" Foreground="{ThemeResource ForegroundThemeBrush}" Margin="75,10,0,10" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True"></TextBlock>
+                    <ListView x:ConnectionId='37'     
+                        Name="AllTagsListView"
+                        SelectionMode="Single"
+                                                                           
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.Below="AllTagsText"
+                        Width="200"
+                        MaxHeight="200"
+                        FontSize="12"
+                        Background="{ThemeResource BackgroundAccentThemeBrush}"
+                        RequestedTheme="Dark"
+                        Margin="20,0,0,20"
+                        BorderBrush="Gray"
+                        BorderThickness="1"           
+                                                       >
+                    </ListView>
+
+                    <Button x:ConnectionId='38' Name="AddButton" Content="Add"                         RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="0,0,0,50"></Button>
+                    <Button x:ConnectionId='39' Name="RemoveButton" Content="Remove" Margin="0,50,0,0"                            RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"></Button>
+
+                    <TextBlock x:ConnectionId='40' Name="CurrentTagsText" Text="Current Tags" FontSize="20" Foreground="{ThemeResource ForegroundThemeBrush}" Margin="0,10,60,10" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True"></TextBlock>
+                    <ListView x:ConnectionId='41'   
+                        Name="CurrentTagsListView"
+                        SelectionMode="Single"
+                                                                               
+                        RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.Below="CurrentTagsText"
+                        Width="200"
+                        MaxHeight="200"
+                        HorizontalContentAlignment="Center"
+                        FontSize="12"
+                        Background="{ThemeResource BackgroundAccentThemeBrush}"
+                        RequestedTheme="Dark"
+                        Margin="0,0,20,20"
+                        BorderBrush="Gray"
+                        BorderThickness="1"           
+                                                                >
+                    </ListView>
+
+                    <Button x:ConnectionId='42' Name="ExitTagsEditButton" FontFamily="Segoe MDL2 Assets" Content="&#xE10A;" FontSize="16"                                  Margin="10,0,0,0" Foreground="{ThemeResource ForegroundThemeBrush}" Background="{ThemeResource BackgroundAccentThemeBrush}" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                </RelativePanel>
+            </Popup>
+        </Grid>
+
+
+        <StackPanel>
+            <RelativePanel>
+                <Button x:ConnectionId='31' Name="HomeButton" Content="Home"                          FontSize="24" Padding="0" Background="{ThemeResource BackgroundThemeBrush}" Foreground="{ThemeResource ForegroundThemeBrush}" Margin="50,25,0,0" />
+                <Button x:ConnectionId='32' Name="FavoritesButton" Content="Favorites"                               Padding="0" Background="{ThemeResource BackgroundThemeBrush}" Foreground="{ThemeResource ForegroundThemeBrush}" FontSize="24" Margin="50,25,0,0" RelativePanel.RightOf="HomeButton" />
+                <Button x:ConnectionId='33' Name="SettingsButton"                              FontFamily="Segoe MDL2 Assets" Content="&#xE115;" Foreground="{ThemeResource ForegroundThemeBrush}" Background="{ThemeResource BackgroundThemeBrush}" Margin="50,0,0,1" RelativePanel.RightOf="FavoritesButton" RelativePanel.AlignBottomWithPanel="True"></Button>
+            </RelativePanel>
+            <RelativePanel Background="{ThemeResource BackgroundThemeBrush}" Margin="50,0,50,0" MinHeight="75">
+                <AutoSuggestBox x:ConnectionId='27' QueryIcon="Find"
+                                Name="AutoSearchBox"
+                                PlaceholderText="Search"
+                                Width="300"
+                                Height="35"
+                                                                   
+                                                                             
+                                RelativePanel.AlignLeftWithPanel="True"
+                                RelativePanel.AlignVerticalCenterWithPanel="True"
+                                Background="{x:Null}"
+                                Foreground="{ThemeResource ForegroundThemeBrush}">
+                    
+                </AutoSuggestBox>
+            
+                <ComboBox x:ConnectionId='28' Name="SortBox" 
+                                                                      
+                          SelectedValuePath ="Content"
+                          RelativePanel.AlignRightWithPanel="True" 
+                          RelativePanel.AlignVerticalCenterWith="AutoSearchBox" 
+                          Margin="0,0,0,0" MinWidth="110" 
+                          MaxHeight="28" 
+                          FontSize="12" 
+                          BorderBrush="Gray"
+                          Foreground="{ThemeResource ForegroundThemeBrush}"
+                          Background="{x:Null}">
+                    <ComboBoxItem Content="Alphabetical" Foreground="{ThemeResource ForegroundBoxThemeBrush}"/>
+                    <ComboBoxItem Content="Rating" Foreground="{ThemeResource ForegroundThemeBrush}"/>
+                </ComboBox>
+
+                <ComboBox x:ConnectionId='29' Name="ViewStyleBox" 
+                                                                           
+                          RelativePanel.LeftOf="SortBox" 
+                          RelativePanel.AlignVerticalCenterWith="AutoSearchBox" 
+                          Margin="0,0,20,0" 
+                          BorderBrush="Gray"
+                          Foreground="{ThemeResource ForegroundThemeBrush}"
+                          Background="{x:Null}" 
+                          FontSize="12" 
+                          MaxHeight="28">
+                    <ComboBoxItem Content="Tile"  Foreground="{ThemeResource ForegroundThemeBrush}"/>
+                    <ComboBoxItem Content="List" Foreground="{ThemeResource ForegroundThemeBrush}"/>
+                    <ComboBoxItem Content="Mix" Foreground="{ThemeResource ForegroundThemeBrush}"/>
+                </ComboBox>
+
+                <Button x:ConnectionId='30' Name="FilterButton" 
+                              FontFamily="Segoe MDL2 Assets" 
+                              Content="&#xE16E;" 
+                              FontSize="14" 
+                                                         
+                              RelativePanel.LeftOf="ViewStyleBox" 
+                              RelativePanel.AlignVerticalCenterWith="AutoSearchBox" 
+                              Margin="0,0,20,0" 
+                              BorderBrush="Gray"
+                              Foreground="{ThemeResource ForegroundThemeBrush}"
+                              Background="{x:Null}"/>
+            </RelativePanel>
+        </StackPanel>
+        <SplitView x:ConnectionId='14' Name="FilterSplitView" 
                    Grid.Row="1" 
                    DisplayMode="Inline" 
                    OpenPaneLength="175" 
                    PanePlacement="Right"
-                   IsPaneOpen="False">
+                   IsPaneOpen="False"
+                   Margin="0,0,0,0" 
+                   Background="{ThemeResource BackgroundThemeBrush}"
+                                                            >
             <SplitView.Pane>
-                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                    <StackPanel Orientation="Vertical" Background="#FF636363">
+                <Grid Background="{ThemeResource BackgroundThemeBrush}">
+                    <RelativePanel x:ConnectionId='15' Name="TagsStackPanel" Background="Gray" Margin="0,60,0,20" >
 
-                        <TextBlock Text="Genres" FontSize="24" HorizontalAlignment="Center"  RequestedTheme="Dark" Margin="0,20,0,0"/>
+                        <TextBlock x:ConnectionId='16'
+                                    Name="GenresTextBlock"
+                                    Text="Tags" 
+                                   FontSize="24" 
+                                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                    
+                                   RequestedTheme="Dark" 
+                                   Margin="0,20,0,0"/>
 
-                        <Button x:ConnectionId='6' Name="FilterResetButton" Content="Reset"                                 FontSize="18" HorizontalAlignment="Stretch" Margin="0,20,0,0" Background="#FF27ABD7" RequestedTheme="Dark"></Button>
+                        <Button x:ConnectionId='17' Name="FilterResetButton" 
+                                Content="Reset" 
+                                                                
+                                FontSize="18" 
+                                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                RelativePanel.Below="GenresTextBlock"
+                                HorizontalAlignment="Stretch" 
+                                Margin="0,20,0,20" 
+                                Width="180"
+                                Background="#FF4D4D4D" 
+                                RequestedTheme="Dark"></Button>
 
-                        <ListView x:ConnectionId='7' Name="TagListView"
+                        <ListView x:ConnectionId='18' Name="TagListView"
                                   SelectionMode="Multiple"
                                                                                  
-                                  Background="#FF27ABD7"
+                                  RelativePanel.Below="FilterResetButton"
+                                  Background="Gray"
                                   RequestedTheme="Dark"
                                   Margin="0,0,0,0"
                                   BorderBrush="Black"
-                                  BorderThickness="0">
-
-                            <ListViewItem x:ConnectionId='8' Name="Romance">
-                                <TextBlock Text="Romance" FontSize="24"/>
-                            </ListViewItem>
-
-                            <ListViewItem x:ConnectionId='9' Name="Comedy">
-                                <TextBlock Text="Comedy" FontSize="24"/>
-                            </ListViewItem>
-
-                            <ListViewItem x:ConnectionId='10' Name="Action">
-                                <TextBlock Text="Action" FontSize="24"/>
-                            </ListViewItem>
+                                  BorderThickness="0"
+                                                                 >
                         </ListView>
-                    </StackPanel>
-                </ScrollViewer>
+                    </RelativePanel>
+                </Grid>
             </SplitView.Pane>
             <SplitView.Content>
 
-
-                <GridView x:ConnectionId='11' Name="MediaInfoGrid"
-                                                       
-                        IsItemClickEnabled="True" 
-                                                      
-                        ItemTemplate="{StaticResource MediaDataTemplate}"
-                        Grid.Row="1"
-                        Margin="30,0,0,0"
-                        ScrollViewer.VerticalScrollBarVisibility="Auto"
-                        ScrollViewer.VerticalScrollMode="Enabled"
-                        HorizontalContentAlignment="Center">
-
-                    <GridView.ItemContainerStyle>
-                        <Style TargetType="FrameworkElement">
-                            <Setter Property="Margin" Value="0 0 30 20"/>
-                        </Style>
-                    </GridView.ItemContainerStyle>
-
-                </GridView>
                 
+                <Grid x:ConnectionId='19' Name="MediaDisplayGrid" Margin="50,0,50,20"  HorizontalAlignment="Stretch">
+
+                    <controls:DropShadowPanel x:ConnectionId='20'
+                                Name="MediaInfoGridDropShadow"
+                                Margin="0,0,0,0"
+                                BlurRadius="30"
+                                ShadowOpacity="1"
+                                OffsetX="2"
+                                OffsetY="2"
+                                Color="Black"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Stretch" Grid.Row="1">
+                        <Grid Background="{ThemeResource BackgroundAccentThemeBrush}">
+
+                                <controls:AdaptiveGridView x:ConnectionId='26' 
+                                    Name="MediaInfoGrid"
+                                    Visibility="Collapsed" 
+                                    Background="{ThemeResource BackgroundAccentThemeBrush}"
+                                    OneRowModeEnabled="False"
+                                                                  
+                                    Margin="20,20,10,20"
+                                    ItemHeight="300"
+                                    DesiredWidth="225"
+                                    SelectionMode="None"
+                                    IsItemClickEnabled="True"
+                                    StretchContentForSingleRow="False"
+                                                                   
+                                    ItemTemplate="{StaticResource IconTemplate}" Style="{StaticResource AdaptiveGridViewStyleCustom}">
+                                </controls:AdaptiveGridView>
+
+                        </Grid>
+                    </controls:DropShadowPanel>
+
+                    <Grid x:ConnectionId='21' Name="ListViewStackPanel" Visibility="Visible" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*" ></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <Grid x:ConnectionId='22' Name="ListViewWithoutCoversGid" MinHeight="50" Margin="30,0,30,10" Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Title" Grid.Column="0" FontSize="28" Margin="100,0,0,0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="Episodes" FontSize="28" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="Rating" FontSize="28" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </Grid>
+
+                        <Grid x:ConnectionId='23' Name="ListViewWithCoversGid" MinHeight="50" Margin="30,0,30,10" Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Title" Grid.Column="1" FontSize="28" Margin="15,0,0,0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="Episodes" FontSize="28" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="Rating" FontSize="28" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </Grid>
+
+                        <controls:DropShadowPanel x:ConnectionId='24' 
+                                Name="MediaInfoListViewDropShadow"
+                                Margin="0,0,0,0"
+                                BlurRadius="30"
+                                ShadowOpacity="1"
+                                OffsetX="2"
+                                OffsetY="2"
+                                Color="Black"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Stretch" Grid.Row="1">
+                            
+                            <Grid>
+                                <ListView x:ConnectionId='25'
+                                    Name="MediaInfoListView"
+                                    Background="{ThemeResource BackgroundAccentThemeBrush}"
+                                                                           
+                                    Grid.Row="1"
+                                    Margin="0,0,0,0"
+                                    SelectionMode="None"
+                                    IsItemClickEnabled="True"
+                                    Padding="20,20,20,20"
+                                    BorderBrush="Gray" 
+                                    BorderThickness="1"
+                                    HorizontalAlignment="Stretch"
+                                                                   
+                                    ItemTemplate="{StaticResource ListViewWithoutCovers}">
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                            <Setter Property="Padding" Value="10,10,10,10" />
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+                                </ListView>
+                            </Grid>
+                        </controls:DropShadowPanel>
+                    </Grid>
+                </Grid>
             </SplitView.Content>
         </SplitView>
     </Grid>
