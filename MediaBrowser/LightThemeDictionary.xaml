@@ -1,0 +1,19 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MediaBrowser">
+
+    <SolidColorBrush x:Key="BackgroundThemeBrush" Color="#FFF3F3F3"/>
+    <SolidColorBrush x:Key="BackgroundAccentThemeBrush" Color="#FFC4C4C4"/>
+
+    <SolidColorBrush x:Key="BackgroundSettingsButtonThemeBrush" Color="#FFC4C4C4"/>
+    <SolidColorBrush x:Key="BackgroundSettingsThemeBrush" Color="#FFF3F3F3"/>
+
+
+    <SolidColorBrush x:Key="ForegroundThemeBrush" Color="Black"/>
+    <SolidColorBrush x:Key="ForegroundBoxThemeBrush" Color="Black"/>
+
+    <SolidColorBrush x:Key="BorderThemeBrush" Color="LightGray"/>
+    <SolidColorBrush x:Key="BoxBackgroundThemeBrush" Color="#FFC4C4C4"/>
+
+</ResourceDictionary>
